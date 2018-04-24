@@ -34,6 +34,7 @@ public class SSActionManager : MonoBehaviour
             else if (ac.enable)
             {
                 ac.Update();
+                ac.FixedUpdate();
             }
         }
 
