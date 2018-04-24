@@ -1,1 +1,2 @@
-视频正在等待审核，通过后会更新
+视频地址
+https://www.bilibili.com/video/av22525248
