@@ -14,4 +14,5 @@ public class DiskData : MonoBehaviour
     public Color color;
     public float speed;
     public Vector3 direction;
+    public SSAction action;
 }

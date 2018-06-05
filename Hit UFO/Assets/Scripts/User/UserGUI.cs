@@ -32,11 +32,16 @@ public class UserGUI : MonoBehaviour
             action.setGameState(GameState.ROUND_START);
         }
 
-        if (!isFirst && action.getGameState() == GameState.ROUND_FINISH && GUI.Button(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 45, 150, 90), "Next Round"))
+        else if (!isFirst && action.getGameState() == GameState.ROUND_FINISH && GUI.Button(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 45, 150, 90), "Next Round"))
         {
             action.setGameState(GameState.ROUND_START);
         }
-
+        else if(!isFirst&&action.getGameState()==GameState.PAUSE&& GUI.Button(new Rect(Screen.width / 2 - 75, Screen.height / 2 - 45, 150, 90), "Game Over"))
+        {
+            isFirst = true;
+            
+            action.Restart();
+        }
     }
 
 

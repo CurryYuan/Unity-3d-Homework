@@ -10,7 +10,7 @@ public enum GameState { ROUND_START, ROUND_FINISH, RUNNING, PAUSE, START }
 
 public interface IUserAction
 {
-    void GameOver();
+    void Restart();
     GameState getGameState();
     void setGameState(GameState gs);
     int GetScore();

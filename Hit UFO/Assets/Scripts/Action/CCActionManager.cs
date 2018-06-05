@@ -7,12 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CCActionManager : SSActionManager, ISSActionCallback
+public class CCActionManager : SSActionManager, ISSActionCallback,IActionManager
 {
 
     public FirstSceneControl sceneController;
     public List<CCFlyAction> Fly;
-    public int DiskNumber = 0;
+    public int DiskNumber { get; set; }
 
     /** 
      * used是用来保存正在使用的动作 

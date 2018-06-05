@@ -67,3 +67,7 @@ D:\unity code\Hit UFO\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 D:\unity code\Hit UFO\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\unity code\Hit UFO\obj\Debug\Assembly-CSharp.dll
 D:\unity code\Hit UFO\obj\Debug\Assembly-CSharp.pdb
+D:\github code\Unity-3d-Homework\Hit UFO\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\github code\Unity-3d-Homework\Hit UFO\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+D:\github code\Unity-3d-Homework\Hit UFO\obj\Debug\Assembly-CSharp.dll
+D:\github code\Unity-3d-Homework\Hit UFO\obj\Debug\Assembly-CSharp.pdb

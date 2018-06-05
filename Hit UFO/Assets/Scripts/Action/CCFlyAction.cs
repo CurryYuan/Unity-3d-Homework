@@ -78,6 +78,11 @@ public class CCFlyAction : SSAction
 
     }
 
+    public override void FixedUpdate()
+    {
+        
+    }
+
     public static CCFlyAction GetSSAction()
     {
         CCFlyAction action = ScriptableObject.CreateInstance<CCFlyAction>();

@@ -14,7 +14,7 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
      * actionManager是用来指定当前的动作管理器 
      */
 
-    public CCActionManager actionManager { get; set; }
+    public IActionManager actionManager { get; set; }
 
     /** 
      * scoreRecorder是用来指定当前的记分管理对象的 
@@ -38,12 +38,10 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
      * currentRound是用来保存当前是那一回合 
      */
 
-    private int currentRound = -1;
+    public int currentRound;
 
     /** 
      * round是用来保存总共有多少回合，这里是3， 
-     * 不过，这个游戏的实现是不断的循环的，即过了 
-     * 第三回合，又回到第一回合 
      */
 
     public int round = 3;
@@ -58,10 +56,13 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
      * gameState是用来保存当前的游戏状态 
      */
 
+    GameObject explosion;
     private GameState gameState = GameState.START;
 
     void Awake()
     {
+        currentRound = 0;
+
         Director director = Director.getInstance();
         director.currentSceneControl = this;
         diskNumber = 10;
@@ -79,16 +80,23 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
 
         if (actionManager.DiskNumber == 0 && gameState == GameState.RUNNING)
         {
-            gameState = GameState.ROUND_FINISH;
+            currentRound = currentRound + 1;
+            if (currentRound == 3)
+            {
+                gameState = GameState.PAUSE;
+            }
+            else
+                gameState = GameState.ROUND_FINISH;
 
         }
 
         if (actionManager.DiskNumber == 0 && gameState == GameState.ROUND_START)
         {
-            currentRound = (currentRound + 1) % round;
+            print(currentRound);
             NextRound();
             actionManager.DiskNumber = 10;
             gameState = GameState.RUNNING;
+
         }
 
         if (time > 1)
@@ -100,12 +108,11 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
         {
             time += Time.deltaTime;
         }
-
-
     }
 
     private void NextRound()
     {
+        print(currentRound);
         DiskFactory df = Singleton<DiskFactory>.Instance;
         for (int i = 0; i < diskNumber; i++)
         {
@@ -141,14 +148,14 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
         //DiskFactory df = Singleton<DiskFactory>.Instance;  
         //df.init(diskNumber);  
         Instantiate(Resources.Load<GameObject>("Prefabs/ground"));
+        
     }
 
 
-    public void GameOver()
+    public void Restart()
     {
-        GUI.color = Color.red;
-        GUI.Label(new Rect(700, 300, 400, 400), "GAMEOVER");
-
+        currentRound = 0;
+        scoreRecorder.Reset();
     }
 
     public int GetScore()
@@ -175,11 +182,12 @@ public class FirstSceneControl : MonoBehaviour, ISceneControl, IUserAction
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-
             if (hit.collider.gameObject.GetComponent<DiskData>() != null)
             {
                 scoreRecorder.Record(hit.collider.gameObject);
-
+                explosion = Instantiate(Resources.Load<GameObject>("Prefabs/Graphic explosion"));
+                explosion.transform.position = hit.collider.gameObject.transform.position;
+                print("Hit");
                 /** 
                  * 如果飞碟被击中，那么就移到地面之下，由工厂负责回收 
                  */
